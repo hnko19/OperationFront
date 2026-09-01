@@ -8,7 +8,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Components/Layout/Layout";
 import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
 import Login from "./Pages/Login/Login";
-
 const queryClient = new QueryClient();
 
 function App() {
