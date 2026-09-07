@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'Amiri';
+  src: url('/fonts/Amiri-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Amiri';
+  src: url('/fonts/Amiri-Bold.woff2') format('woff2');
+}
+
+body {
+  font-family: 'Amiri', serif;
+}

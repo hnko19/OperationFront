@@ -1,5 +1,6 @@
 
-export default function CrudBtn({text , btnType , fun} : {text : string , btnType:string , fun: () => void; }) {
+export default function 
+CrudBtn({text , btnType , fun} : {text : string , btnType:string , fun: () => void; }) {
 
   let bgColor : string = "";
   let icon :   JSX.Element | null = null;
