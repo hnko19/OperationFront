@@ -1,5 +1,7 @@
 import { useAircraftRegistration } from '../Hooks/AircraftRegistrationHook/useAircraftRegistration';
 import type { IAircraftRegistration } from '../Interface/IAircraftRegistration';
+import type { IAircraftRegistrationshow } from '../Interface/IAircraftRegistration';
+
 import { useState } from 'react';
 import CrudBtn from '../Components/Buttons/CrudBtn';
 import AircraftRegistrationModel from '../Components/Popup/AircraftRegistrationModel';
@@ -20,11 +22,12 @@ export default function AircraftRegistrationPage() {
     useState<IAircraftRegistration | null>(null);
   const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
 
-  const tblBody /* :IAircraftType[] */ = aircraftRegistrations.map(
+  const tblBody: IAircraftRegistrationshow[] = aircraftRegistrations.map(
     (aircraftRegistration) => ({
       id: aircraftRegistration.id,
       registration: aircraftRegistration.registration,
       maxTakoffWieght: aircraftRegistration.maxTakoffWieght,
+      aircraftType: aircraftRegistration.aircraftType?.type ?? 'غير محدد',
 
       // sizeId: aircraftType.sizeId,
       //   aircraftType: aircraftRegistration.aircraftType?.type ?? 'غير محدد',
