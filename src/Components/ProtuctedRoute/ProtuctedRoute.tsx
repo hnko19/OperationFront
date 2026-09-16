@@ -1,9 +1,9 @@
-import SideMenu from "../SideMenu/SideMenu";
+import SideMenu from '../SideMenu/SideMenu';
 
 export default function ProtuctedRoute({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{<SideMenu> {children}  </SideMenu>}</>;
+  return <>{<SideMenu> {children} </SideMenu>}</>;
 }

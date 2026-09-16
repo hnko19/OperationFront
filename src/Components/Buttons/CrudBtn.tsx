@@ -1,8 +1,9 @@
+import type React from "react";
 
 export default function CrudBtn({text , btnType , fun} : {text : string , btnType:string , fun: () => void; }) {
 
-  let bgColor : string = "";
-  let icon :   JSX.Element | null = null;
+  let bgColor : string;
+  let icon :  React.ReactNode | null;
     if (btnType == "create") {
         bgColor = "bg-[#31213F]"
         icon = <i className="  fa-solid fa-plus"></i>;

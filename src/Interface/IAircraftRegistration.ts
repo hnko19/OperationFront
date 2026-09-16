@@ -13,5 +13,5 @@ export interface IAircraftRegistrationshow {
   aircraftTypeId: number;
   // aireLineId: string;
   maxTakoffWieght: number;
-  //   aircraftType?: number;
+  aircraftType?: string;
 }

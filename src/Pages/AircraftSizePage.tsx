@@ -1,30 +1,23 @@
-import { useCountry } from '../Hooks/CountryHook/useCountry';
-import type { ICountry } from '../Interface/ICountry';
+import { useAircraftSize } from '../Hooks/AircraftSizeHook/useAircraftSize';
+import type { IAircraftSize } from '../Interface/IAircraftSize';
 import { useState } from 'react';
 import CrudBtn from '../Components/Buttons/CrudBtn';
+import AircraftSizeModel from '../Components/Popup/AircraftSizeModel';
 import PageTitle from '../Components/Text/PageTitle';
 import MainTable from '../Components/Tables/MainTable';
-import CountryModel from '../Components/Popup/CountryModel';
 
-export default function CountryPage() {
-  const headers = [
-    '#',
-    'name Ar',
-    'name En',
-    'Code',
-    <i className="fa fa-cogs"></i>,
-  ];
-  const { data: countries = [] } = useCountry();
+export default function AircraftSizePage() {
+  const headers = ['#', 'الوزن(Size)', <i className="fa fa-cogs"></i>];
+  const { data: aircraftsizes = [] } = useAircraftSize();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState<ICountry | null>(null);
+  const [selectedAircraftSize, setSelectedAircraftSize] =
+    useState<IAircraftSize | null>(null);
   const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
 
   // تحويل البيانات بنفس الترتيب
-  const tblBody: ICountry[] = countries.map((country) => ({
-    id: country.id,
-    nameAr: country.nameAr,
-    nameEn: country.nameEn,
-    code: country.code,
+  const tblBody: IAircraftSize[] = aircraftsizes.map((aircraftsize) => ({
+    id: aircraftsize.id,
+    size: aircraftsize.size,
 
     // countryId: airport.CountryId,
     action: (
@@ -33,7 +26,7 @@ export default function CountryPage() {
           text="edit"
           btnType="edit"
           fun={() => {
-            setSelectedCountry(country); // خزن البيانات
+            setSelectedAircraftSize(aircraftsize); // خزن البيانات
             setModalMode('edit');
             setIsModalOpen(true);
           }}
@@ -44,30 +37,30 @@ export default function CountryPage() {
   }));
 
   const openAddModal = () => {
-    setSelectedCountry(null); // خزن البيانات
+    setSelectedAircraftSize(null); // خزن البيانات
     setModalMode('add');
     setIsModalOpen(true);
   };
 
   return (
     <>
-      <CountryModel
+      <AircraftSizeModel
         isOpen={isModalOpen}
         onClose={() => {
           setIsModalOpen(false);
-          setSelectedCountry(null);
+          setSelectedAircraftSize(null);
         }}
         mode={modalMode}
-        initialData={selectedCountry ?? undefined}
+        initialData={selectedAircraftSize ?? undefined}
       />
 
       <div className="flex justify-between items-center">
         <CrudBtn
-          text="Add New Country"
+          text="Add Aircraft sizes"
           btnType="create"
           fun={() => openAddModal()}
         />
-        <PageTitle text="Country" />
+        <PageTitle text="Aircraft sizes" />
       </div>
       <MainTable tblHeader={headers} tblBody={tblBody ?? []} />
     </>

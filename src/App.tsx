@@ -9,6 +9,9 @@ import Layout from './Components/Layout/Layout';
 import NotFoundPage from './Pages/NotFoundPage/NotFoundPage';
 import CountryPage from './Pages/CountryPage';
 import HandlingAgentsCompanyPage from './Pages/HandlingAgentsCompanyPage';
+import AircraftRegistrationPage from './Pages/AircraftRegistrationPage';
+import CompanyInfoPage from './Pages/CompanyInfoPage';
+import AircraftSizePage from './Pages/AircraftSizePage';
 const queryClient = new QueryClient();
 
 function App() {
@@ -24,7 +27,7 @@ function App() {
         { path: '*', element: <NotFoundPage /> },
         {
           index: true,
-          path: 'countryPage',
+        
           element: (
             <ProtuctedRoute>
               <CountryPage />
@@ -37,6 +40,32 @@ function App() {
           element: (
             <ProtuctedRoute>
               <HandlingAgentsCompanyPage />
+            </ProtuctedRoute>
+          ),
+        },
+
+         {
+          path: 'aircraftRegistration',
+          element: (
+            <ProtuctedRoute>
+              <AircraftRegistrationPage />
+            </ProtuctedRoute>
+          ),
+        },
+
+         {
+          path: 'companyInfo',
+          element: (
+            <ProtuctedRoute>
+              <CompanyInfoPage />
+            </ProtuctedRoute>
+          ),
+        },
+         {
+          path: 'aircraftSize',
+          element: (
+            <ProtuctedRoute>
+              <AircraftSizePage />
             </ProtuctedRoute>
           ),
         },
