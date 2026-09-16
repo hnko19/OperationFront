@@ -1,29 +1,29 @@
-import { useHandlingAgentsCompany } from '../Hooks/HandlingAgentsCompanyHook/useHandlingAgentsCompany';
-import type { IHandlingAgentsCompany } from '../Interface/IHandlingAgentsCompany';
-import type { IHandlingAgentsCompanyshow } from '../Interface/IHandlingAgentsCompany';
-import { useState } from 'react';
-import CrudBtn from '../Components/Buttons/CrudBtn';
-import PageTitle from '../Components/Text/PageTitle';
-import MainTable from '../Components/Tables/MainTable';
-import HandlingAgentsCompanyModel from '../Components/Popup/HandlingAgentsCompanyModel';
+import { useHandlingAgentsCompany } from "../Hooks/HandlingAgentsCompanyHook/useHandlingAgentsCompany";
+import type { IHandlingAgentsCompany } from "../Interface/IHandlingAgentsCompany";
+import type { IHandlingAgentsCompanyshow } from "../Interface/IHandlingAgentsCompany";
+import { useState } from "react";
+import CrudBtn from "../Components/Buttons/CrudBtn";
+import PageTitle from "../Components/Text/PageTitle";
+import MainTable from "../Components/Tables/MainTable";
+import HandlingAgentsCompanyModel from "../Components/Popup/HandlingAgentsCompanyModel";
 
 export default function HandlingAgentsCompanyPage() {
   const headers = [
-    '#',
-    'name Ar',
-    'name En',
-    'Email',
+    "#",
+    "name Ar",
+    "name En",
+    "Email",
     // 'currency',
-    'phone',
-    'address',
-    'مفعل',
+    "phone",
+    "address",
+    "مفعل",
     <i className="fa fa-cogs"></i>,
   ];
   const { data: handlingCompanies = [] } = useHandlingAgentsCompany();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedhandlingCompany, setSelectedhandlingCompany] =
     useState<IHandlingAgentsCompany | null>(null);
-  const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
+  const [modalMode, setModalMode] = useState<"add" | "edit">("add");
 
   // تحويل البيانات بنفس الترتيب
   const tblBody: IHandlingAgentsCompanyshow[] = handlingCompanies.map(
@@ -39,11 +39,11 @@ export default function HandlingAgentsCompanyPage() {
         <span
           className={`px-2 py-1 rounded-full text-xs font-semibold ${
             handlingCompany.isActive
-              ? 'bg-green-100 text-green-800'
-              : 'bg-red-100 text-red-800'
+              ? "bg-green-100 text-green-800"
+              : "bg-red-100 text-red-800"
           }`}
         >
-          {handlingCompany.isActive ? 'مفعل' : 'غير مفعل'}
+          {handlingCompany.isActive ? "مفعل" : "غير مفعل"}
         </span>
       ),
 
@@ -51,11 +51,11 @@ export default function HandlingAgentsCompanyPage() {
       action: (
         <div className="flex justify-center gap-x-2">
           <CrudBtn
-            text="edit"
+            text=""
             btnType="edit"
             fun={() => {
               setSelectedhandlingCompany(handlingCompany); // خزن البيانات
-              setModalMode('edit');
+              setModalMode("edit");
               setIsModalOpen(true);
             }}
           />
@@ -67,7 +67,7 @@ export default function HandlingAgentsCompanyPage() {
 
   const openAddModal = () => {
     setSelectedhandlingCompany(null); // خزن البيانات
-    setModalMode('add');
+    setModalMode("add");
     setIsModalOpen(true);
   };
 
