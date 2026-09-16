@@ -1,16 +1,17 @@
-import { useState, type ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, type ReactNode } from "react";
+import { Link } from "react-router-dom";
 // import logo from "../../assets/sacLogo.png";
+import short_logo from "../../../public/airport-logo-short.png";
 
 type MenuItem =
   | {
-      type: 'link';
+      type: "link";
       title: string;
       path: string;
       svgPath: string;
     }
   | {
-      type: 'submenu';
+      type: "submenu";
       title: string;
       svgPath: string;
       children: { name: string; path: string }[];
@@ -27,20 +28,20 @@ export default function SideMenu({ children }: { children: ReactNode }) {
 
   const menuItems: MenuItem[] = [
     {
-      type: 'link',
-      title: 'الرئيسية',
-      path: '/',
+      type: "link",
+      title: "الرئيسية",
+      path: "/",
       svgPath:
-        'M10 20a1 1 0 01-1-1V11H6a1 1 0 01-1-1V9a1 1 0 011-1h3V5a1 1 0 012 0v3h3a1 1 0 011 1v1a1 1 0 01-1 1h-3v8a1 1 0 01-1 1z',
+        "M10 20a1 1 0 01-1-1V11H6a1 1 0 01-1-1V9a1 1 0 011-1h3V5a1 1 0 012 0v3h3a1 1 0 011 1v1a1 1 0 01-1 1h-3v8a1 1 0 01-1 1z",
     },
     {
-      type: 'submenu',
-      title: 'البيانات الاولية',
+      type: "submenu",
+      title: "البيانات الاولية",
       svgPath:
-        'M10 4a1 1 0 011 1v1h2V5a1 1 0 012 0v1h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-2v1a1 1 0 11-2 0v-1H7a1 1 0 110-2h1V8H7a1 1 0 110-2h1V5a1 1 0 011-1z',
+        "M10 4a1 1 0 011 1v1h2V5a1 1 0 012 0v1h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-2v1a1 1 0 11-2 0v-1H7a1 1 0 110-2h1V8H7a1 1 0 110-2h1V5a1 1 0 011-1z",
       children: [
-        { name: 'Country', path: '/countryPage' },
-        { name: 'handling Company', path: '/handlingAgentsCompany' },
+        { name: "Country", path: "/countryPage" },
+        { name: "handling Company", path: "/handlingAgentsCompany" },
         // { name: 'الصالات', path: '/terminals' },
         // { name: 'العرض الافتراضي', path: '/defaultviews' },
       ],
@@ -91,7 +92,7 @@ export default function SideMenu({ children }: { children: ReactNode }) {
             />
           </svg>
         </button>
-        <h2>Fids System</h2>
+        <h2>Airport Operation System</h2>
       </div>
 
       <div className="min-h-full max-w-screen flex flex-row bg-gradient-to-b from-[#2b1f3a] via-[#593260] to-[#d66d9e]">
@@ -99,7 +100,7 @@ export default function SideMenu({ children }: { children: ReactNode }) {
         {(sidenav || window.innerWidth >= 640) && (
           <div
             className={` min-h-screen shadow-xl px-3 w-64 overflow-y-auto transition-transform duration-300 ease-in-out
-              ${sidenav && window.innerWidth < 640 ? 'fixed top-0 start-0 z-40' : ''}
+              ${sidenav && window.innerWidth < 640 ? "fixed top-0 start-0 z-40" : ""}
             `}
           >
             {/* زر اغلاق الموبايل */}
@@ -125,21 +126,21 @@ export default function SideMenu({ children }: { children: ReactNode }) {
             )}
 
             <div className="space-y-6 md:space-y-10 mt-10 text-white">
-              <h1 className="hidden md:block font-bold text-xl text-center ">
-                Fids System
-              </h1>
+              {/* <h1 className="hidden md:block font-bold text-xl text-center ">
+                Airport Operation System
+              </h1> */}
 
               {/* البروفايل */}
               <div className="space-y-3" id="profile">
                 <img
-                  //   src={logo}
+                  src={short_logo}
                   alt="User Avatar"
-                  className="w-16 rounded-full mx-auto"
+                  className="w-30 rounded-full mx-auto"
                 />
                 <div className="text-center">
                   <h2 className="font-medium text-sm text-teal-500">
-                    {' '}
-                    Mohaned Sameer{' '}
+                    {" "}
+                    Mohaned Sameer{" "}
                   </h2>
                   <p className="text-xs text-white"> Adminstartor </p>
                 </div>
@@ -148,7 +149,7 @@ export default function SideMenu({ children }: { children: ReactNode }) {
               {/* القائمة */}
               <div className="flex flex-col space-y-2" id="menu">
                 {menuItems.map((item, index) => {
-                  if (item.type === 'link') {
+                  if (item.type === "link") {
                     return (
                       <Link
                         key={index}
@@ -166,7 +167,7 @@ export default function SideMenu({ children }: { children: ReactNode }) {
                     );
                   }
 
-                  if (item.type === 'submenu') {
+                  if (item.type === "submenu") {
                     const isOpen = openSubmenu === item.title;
                     return (
                       <div key={index} className="flex flex-col">
@@ -185,7 +186,7 @@ export default function SideMenu({ children }: { children: ReactNode }) {
                           </div>
                           <svg
                             className={`w-4 h-4 transform transition-transform ${
-                              isOpen ? 'rotate-90' : ''
+                              isOpen ? "rotate-90" : ""
                             }`}
                             fill="none"
                             stroke="currentColor"
