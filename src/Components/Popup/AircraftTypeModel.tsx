@@ -1,19 +1,21 @@
 import type {
   IAircraftTypeShow,
   IAircraftTypeCreate,
-} from '../../Interface/IAircraftType';
-import { useAddAircraftType } from '../../Hooks/AircraftTypeHook/useAddAircraftType';
-import { useUpdateAircraftType } from '../../Hooks/AircraftTypeHook/useUpdateAircraftType';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { toast } from 'react-toastify';
-import BaseModal from './BaseModal';
-import SelectSingle from '../DropdownList/SelectSingle';
+} from "../../Interface/IAircraftType";
+import { useAddAircraftType } from "../../Hooks/AircraftTypeHook/useAddAircraftType";
+import { useUpdateAircraftType } from "../../Hooks/AircraftTypeHook/useUpdateAircraftType";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { toast } from "react-toastify";
+import BaseModal from "./BaseModal";
+import SelectSingle from "../DropdownList/SelectSingle";
+import { useAircraftSize } from "../../Hooks/AircraftSizeHook/useAircraftSize";
+import type { IAircraftSize } from "../../Interface/IAircraftSize";
 
 interface AircraftTypeModelProps {
   isOpen: boolean;
   onClose: () => void;
-  mode: 'add' | 'edit';
+  mode: "add" | "edit";
   initialData?: IAircraftTypeShow;
 }
 
@@ -24,31 +26,32 @@ export default function AircraftTypeModel({
   initialData,
 }: AircraftTypeModelProps) {
   const { mutate: addAircraftType, isPending: adding } = useAddAircraftType();
-  const { mutate: updateAircraftType, isPending: updating } = useUpdateAircraftType();
+  const { mutate: updateAircraftType, isPending: updating } =
+    useUpdateAircraftType();
 
-  // خيارات أحجام الطائرات (يمكن جلبها من Hook مخصص إذا كانت ديناميكية)
-  const sizeOptions = [
-    { value: 1, label: 'Small' },
-    { value: 2, label: 'Medium' },
-    { value: 3, label: 'Large' },
-    { value: 4, label: 'Heavy' },
-  ];
+  // داخل الـ Component:
+  const { data: aircraftSizes = [] } = useAircraftSize();
+
+  const sizeOptions = aircraftSizes.map((s: IAircraftSize) => ({
+    value: s.id,
+    label: s.size,
+  }));
 
   const formik = useFormik({
     initialValues: {
       id: initialData?.id ?? 0,
-      type: initialData?.type ?? '',
+      type: initialData?.type ?? "",
       sizeId: initialData?.sizeId ?? 0,
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
-      type: Yup.string().trim().required('نوع الطراز مطلوب (Type is required)'),
+      type: Yup.string().trim().required("نوع الطراز مطلوب (Type is required)"),
       sizeId: Yup.number()
-        .min(1, 'يرجى اختيار حجم الطائرة (Size is required)')
-        .required('حجم الطائرة مطلوب'),
+        .min(1, "يرجى اختيار حجم الطائرة (Size is required)")
+        .required("حجم الطائرة مطلوب"),
     }),
     onSubmit: (values, { resetForm }) => {
-      if (mode === 'add') {
+      if (mode === "add") {
         const payload: IAircraftTypeCreate = {
           type: values.type,
           sizeId: Number(values.sizeId),
@@ -58,9 +61,9 @@ export default function AircraftTypeModel({
           onSuccess: () => {
             resetForm();
             onClose();
-            toast.success('تمت إضافة نوع الطائرة بنجاح');
+            toast.success("تمت إضافة نوع الطائرة بنجاح");
           },
-          onError: () => toast.error('حدث خطأ أثناء الإضافة'),
+          onError: () => toast.error("حدث خطأ أثناء الإضافة"),
         });
       } else {
         const payload: IAircraftTypeShow = {
@@ -77,7 +80,7 @@ export default function AircraftTypeModel({
               sizeOptions.find((opt) => opt.value === Number(values.sizeId))
                 ?.label ??
               initialData?.size?.size ??
-              '',
+              "",
           },
         };
 
@@ -85,21 +88,21 @@ export default function AircraftTypeModel({
           onSuccess: () => {
             resetForm();
             onClose();
-            toast.success('تم التعديل بنجاح');
+            toast.success("تم التعديل بنجاح");
           },
-          onError: () => toast.error('حدث خطأ أثناء التعديل'),
+          onError: () => toast.error("حدث خطأ أثناء التعديل"),
         });
       }
     },
   });
 
   const handleClose = () => {
-    if (mode === 'add') {
+    if (mode === "add") {
       formik.resetForm();
     } else {
       formik.setValues({
         id: initialData?.id ?? 0,
-        type: initialData?.type ?? '',
+        type: initialData?.type ?? "",
         sizeId: initialData?.sizeId ?? 0,
       });
     }
@@ -111,9 +114,9 @@ export default function AircraftTypeModel({
       isOpen={isOpen}
       onClose={handleClose}
       title={
-        mode === 'add'
-          ? 'إضافة نوع طائرة (Add Aircraft Type)'
-          : 'تعديل نوع طائرة (Edit Aircraft Type)'
+        mode === "add"
+          ? "إضافة نوع طائرة (Add Aircraft Type)"
+          : "تعديل نوع طائرة (Edit Aircraft Type)"
       }
     >
       <form
@@ -122,7 +125,10 @@ export default function AircraftTypeModel({
       >
         {/* حقل نوع الطائرة (Type) */}
         <div className="flex flex-col">
-          <label htmlFor="type" className="text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="type"
+            className="text-sm font-medium text-gray-700 mb-1"
+          >
             نوع / طراز الطائرة (Aircraft Type):
           </label>
           <input
@@ -142,14 +148,17 @@ export default function AircraftTypeModel({
 
         {/* حقل اختيار الحجم (Size) */}
         <div className="flex flex-col">
-          <label htmlFor="sizeId" className="text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="sizeId"
+            className="text-sm font-medium text-gray-700 mb-1"
+          >
             الحجم (Aircraft Size):
           </label>
           <SelectSingle
             options={sizeOptions}
             name="sizeId"
             value={formik.values.sizeId}
-            onChange={(val) => formik.setFieldValue('sizeId', val)}
+            onChange={(val) => formik.setFieldValue("sizeId", val)}
           />
           {formik.touched.sizeId && formik.errors.sizeId && (
             <p className="text-red-500 text-xs mt-1">{formik.errors.sizeId}</p>
@@ -171,12 +180,12 @@ export default function AircraftTypeModel({
             className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded transition-colors disabled:opacity-50"
           >
             {adding || updating
-              ? mode === 'add'
-                ? 'جاري الإضافة...'
-                : 'جاري التعديل...'
-              : mode === 'add'
-                ? 'إضافة'
-                : 'تعديل'}
+              ? mode === "add"
+                ? "جاري الإضافة..."
+                : "جاري التعديل..."
+              : mode === "add"
+                ? "إضافة"
+                : "تعديل"}
           </button>
         </div>
       </form>

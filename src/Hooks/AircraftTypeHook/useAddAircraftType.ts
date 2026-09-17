@@ -21,7 +21,7 @@ export const useAddAircraftType = (): UseMutationResult<
     mutationFn: (aircraftType: IAircraftTypeCreate) =>
       AddAircraftType(aircraftType),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['aircraft'] });
+      queryClient.invalidateQueries({ queryKey: ['aircraftTypes'] });
     },
     onError: (e) => {
       console.error(e);

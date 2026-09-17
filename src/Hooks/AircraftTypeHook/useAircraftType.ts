@@ -4,7 +4,7 @@ import getAircraftType from '../../Api/AircraftType';
 
 export function useAircraftType() {
   return useQuery({
-    queryKey: ['aircaftType'],
+    queryKey: ['aircraftTypes'],
     queryFn: getAircraftType,
     refetchInterval: 60000,
   });
