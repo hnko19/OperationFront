@@ -40,19 +40,11 @@ export default function SideMenu({ children }: { children: ReactNode }) {
       svgPath:
         "M10 4a1 1 0 011 1v1h2V5a1 1 0 012 0v1h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-2v1a1 1 0 11-2 0v-1H7a1 1 0 110-2h1V8H7a1 1 0 110-2h1V5a1 1 0 011-1z",
       children: [
-<<<<<<< HEAD
-        { name: "Country", path: "/countryPage" },
+        { name: "Country", path: "/" },
         { name: "handling Company", path: "/handlingAgentsCompany" },
-        // { name: 'الصالات', path: '/terminals' },
-        // { name: 'العرض الافتراضي', path: '/defaultviews' },
-=======
-        // { name: 'Country', path: '/countryPage' },
-        { name: 'Country', path: '/' }, // <-- التعديل هنا ليوجه إلى الرئيسية
-        { name: 'handling Company', path: '/handlingAgentsCompany' },
-        { name: 'Aircraft Registration', path: '/aircraftRegistration' },
-        { name: 'Company Information', path: '/companyInfo' },
-        { name: 'Aircraft Size', path: '/aircraftSize' },
->>>>>>> 2abc54ee12977f298d30bd23b0160e2bbeab55fd
+        { name: "Aircraft Registration", path: "/aircraftRegistration" },
+        { name: "Company Information", path: "/companyInfo" },
+        { name: "Aircraft Size", path: "/aircraftSize" },
       ],
     },
 
