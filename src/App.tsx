@@ -9,6 +9,7 @@ import Layout from "./Components/Layout/Layout";
 import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
 import CountryPage from "./Pages/CountryPage";
 import HandlingAgentsCompanyPage from "./Pages/HandlingAgentsCompanyPage";
+import AircraftType from "./Pages/AircraftType/AircraftType";
 const queryClient = new QueryClient();
 
 function App() {
@@ -37,6 +38,15 @@ function App() {
           element: (
             <ProtuctedRoute>
               <HandlingAgentsCompanyPage />
+            </ProtuctedRoute>
+          ),
+        },
+
+        {
+          path: "AircraftType",
+          element: (
+            <ProtuctedRoute>
+              <AircraftType />
             </ProtuctedRoute>
           ),
         },
