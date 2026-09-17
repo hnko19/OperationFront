@@ -84,12 +84,12 @@ export default function HandlingAgentsCompanyPage() {
       />
 
       <div className="flex justify-between items-center">
-        <PageTitle text="Handling Agents Company " />
         <CrudBtn
-          text="اضافة شركة مناولة ارضية"
+          text="Adding handling company"
           btnType="create"
           fun={() => openAddModal()}
         />
+        <PageTitle text="Adding a ground handling company" />
       </div>
       <MainTable tblHeader={headers} tblBody={tblBody ?? []} />
     </>
