@@ -29,14 +29,14 @@ export default function SideMenu({ children }: { children: ReactNode }) {
   const menuItems: MenuItem[] = [
     {
       type: "link",
-      title: "الرئيسية",
+      title: "Home",
       path: "/",
       svgPath:
         "M10 20a1 1 0 01-1-1V11H6a1 1 0 01-1-1V9a1 1 0 011-1h3V5a1 1 0 012 0v3h3a1 1 0 011 1v1a1 1 0 01-1 1h-3v8a1 1 0 01-1 1z",
     },
     {
       type: "submenu",
-      title: "البيانات الاولية",
+      title: " Initial data",
       svgPath:
         "M10 4a1 1 0 011 1v1h2V5a1 1 0 012 0v1h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-2v1a1 1 0 11-2 0v-1H7a1 1 0 110-2h1V8H7a1 1 0 110-2h1V5a1 1 0 011-1z",
       children: [
@@ -45,6 +45,7 @@ export default function SideMenu({ children }: { children: ReactNode }) {
         { name: "Aircraft Registration", path: "/aircraftRegistration" },
         { name: "Company Information", path: "/companyInfo" },
         { name: "Aircraft Size", path: "/aircraftSize" },
+        { name: "Aircraft Agent", path: "/airlineagent" },
       ],
     },
 
