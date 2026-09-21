@@ -25,6 +25,7 @@ export default function MultiDataTable<TData>({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState('');
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data,
     columns,
@@ -84,7 +85,7 @@ export default function MultiDataTable<TData>({
                           ? null
                           : flexRender(
                               header.column.columnDef.header,
-                              header.getContext()
+                              header.getContext(),
                             )}
                         {isSorted === 'asc' && <span>▲</span>}
                         {isSorted === 'desc' && <span>▼</span>}
@@ -106,7 +107,9 @@ export default function MultiDataTable<TData>({
                   <div className="flex flex-col items-center justify-center gap-3">
                     {/* Spinner متحرك */}
                     <div className="w-8 h-8 border-4 border-gray-200 border-t-[#31213F] rounded-full animate-spin"></div>
-                    <span className="text-sm font-medium">جاري تحميل البيانات...</span>
+                    <span className="text-sm font-medium">
+                      جاري تحميل البيانات...
+                    </span>
                   </div>
                 </td>
               </tr>
@@ -134,7 +137,7 @@ export default function MultiDataTable<TData>({
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </td>
                   ))}

@@ -6,8 +6,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import BaseModal from './BaseModal';
-// import { useAircraftType } from '../../Hooks/AircraftTypeHook/useAircraftType';
-// import SelectSingle from '../DropdownList/SelectSingle';
+import { useAircraftType } from '../../Hooks/AircraftTypeHook/useAircraftType';
+import SelectSingle from '../DropdownList/SelectSingle';
 
 interface AircraftTypeModelProps {
   isOpen: boolean;
@@ -26,13 +26,13 @@ export default function AircraftRegistrationModel({
     useAddAircraftRegistration();
   const { mutate: UpdateAircraftRegistration, isPending: updating } =
     useUpdateAircraftRegistration();
-  //   const { data: aircraftTypes } = useAircraftType();
+  const { data: aircraftTypes } = useAircraftType();
 
-  //   const AircraftTypeOptions =
-  //     aircraftTypes?.map((t) => ({
-  //       value: t.id,
-  //       label: t.type,
-  //     })) ?? [];
+  const AircraftTypeOptions =
+    aircraftTypes?.map((t) => ({
+      value: t.id,
+      label: t.type,
+    })) ?? [];
 
   const formik = useFormik({
     initialValues: {
@@ -141,22 +141,25 @@ export default function AircraftRegistrationModel({
           </div>
 
           {/* aircraftType */}
-          {/* <div className="flex flex-col">
-            <label htmlFor="aircraftTypeId" className="text-sm text-gray-700">
-              Aircraft Type :
-            </label>
-            <SelectSingle
-              options={AircraftTypeOptions}
-              name="aircraftTypeId"
-              value={formik.values.aircraftTypeId}
-              onChange={(val) => formik.setFieldValue('aircraftTypeId', val)}
-            />
-            {formik.touched.aircraftTypeId && formik.errors.aircraftTypeId && (
-              <p className="text-red-500 text-sm">
-                {formik.errors.aircraftTypeId}
-              </p>
-            )}
-          </div> */}
+          {
+            <div className="flex flex-col">
+              <label htmlFor="aircraftTypeId" className="text-sm text-gray-700">
+                Aircraft Type :
+              </label>
+              <SelectSingle
+                options={AircraftTypeOptions}
+                name="aircraftTypeId"
+                value={formik.values.aircraftTypeId}
+                onChange={(val) => formik.setFieldValue('aircraftTypeId', val)}
+              />
+              {formik.touched.aircraftTypeId &&
+                formik.errors.aircraftTypeId && (
+                  <p className="text-red-500 text-sm">
+                    {formik.errors.aircraftTypeId}
+                  </p>
+                )}
+            </div>
+          }
 
           {/* Buttons */}
           <div className="flex justify-end space-x-2 pt-2">
