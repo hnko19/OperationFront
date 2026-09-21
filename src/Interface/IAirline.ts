@@ -14,3 +14,13 @@ export interface IAirline {
   updatedBy: string | null;
   updatingDate: string | null;
 }
+
+
+export interface IAirlineFids {
+  Id: number;
+  NameAr: string;
+  NameEn: string;
+  Code: string;
+  Logo: string;
+  Email: string;
+}

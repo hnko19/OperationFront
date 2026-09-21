@@ -6,7 +6,6 @@ import PageTitle from "../../Components/Text/PageTitle";
 import MainTable from "../../Components/Tables/MainTable";
 import AircraftTypeModel from "../../Components/Popup/AircraftTypeModel";
 
-
 // واجهة لتمثيل البيانات المعروضة في أسطر الجدول
 export interface IAircraftTypeTableRow {
   id: number;
@@ -53,11 +52,7 @@ export default function AircraftTypePage() {
       : "-",
     action: (
       <div className="flex justify-center items-center gap-x-2">
-        <CrudBtn
-          text=""
-          btnType="edit"
-          fun={() => openEditModal(item)}
-        />
+        <CrudBtn text="" btnType="edit" fun={() => openEditModal(item)} />
         {/* في حال تفعيل الحذف لاحقاً:
         <CrudBtn
           text=""
@@ -82,9 +77,9 @@ export default function AircraftTypePage() {
       />
 
       <div className="flex justify-between items-center mb-4">
-        <PageTitle text="أنواع الطائرات (Aircraft Types)" />
+        <PageTitle text="Aircraft Types" />
         <CrudBtn
-          text="إضافة نوع طائرة"
+          text="New Aircraft Type  "
           btnType="create"
           fun={openAddModal}
         />

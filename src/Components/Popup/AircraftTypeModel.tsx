@@ -45,10 +45,10 @@ export default function AircraftTypeModel({
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
-      type: Yup.string().trim().required("نوع الطراز مطلوب (Type is required)"),
+      type: Yup.string().trim().required("Type is required"),
       sizeId: Yup.number()
-        .min(1, "يرجى اختيار حجم الطائرة (Size is required)")
-        .required("حجم الطائرة مطلوب"),
+        .min(1, "Size is required")
+        .required(" Size is required "),
     }),
     onSubmit: (values, { resetForm }) => {
       if (mode === "add") {
@@ -61,9 +61,9 @@ export default function AircraftTypeModel({
           onSuccess: () => {
             resetForm();
             onClose();
-            toast.success("تمت إضافة نوع الطائرة بنجاح");
+            toast.success("  Added Successfully  ");
           },
-          onError: () => toast.error("حدث خطأ أثناء الإضافة"),
+          onError: () => toast.error("An error occurred while adding"),
         });
       } else {
         const payload: IAircraftTypeShow = {
@@ -88,9 +88,9 @@ export default function AircraftTypeModel({
           onSuccess: () => {
             resetForm();
             onClose();
-            toast.success("تم التعديل بنجاح");
+            toast.success(" Updated Successfully ");
           },
-          onError: () => toast.error("حدث خطأ أثناء التعديل"),
+          onError: () => toast.error("  An error occurred while updating. "),
         });
       }
     },
@@ -113,11 +113,7 @@ export default function AircraftTypeModel({
     <BaseModal
       isOpen={isOpen}
       onClose={handleClose}
-      title={
-        mode === "add"
-          ? "إضافة نوع طائرة (Add Aircraft Type)"
-          : "تعديل نوع طائرة (Edit Aircraft Type)"
-      }
+      title={mode === "add" ? "Add Aircraft Type" : "Edit Aircraft Type"}
     >
       <form
         onSubmit={formik.handleSubmit}
@@ -129,13 +125,13 @@ export default function AircraftTypeModel({
             htmlFor="type"
             className="text-sm font-medium text-gray-700 mb-1"
           >
-            نوع / طراز الطائرة (Aircraft Type):
+           Aircraft Type :
           </label>
           <input
             id="type"
             name="type"
             type="text"
-            placeholder="مثال: Boeing 737-800 أو A320"
+            placeholder="ex: Boeing 737-800 / A320"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.type}
@@ -152,7 +148,7 @@ export default function AircraftTypeModel({
             htmlFor="sizeId"
             className="text-sm font-medium text-gray-700 mb-1"
           >
-            الحجم (Aircraft Size):
+           Aircraft Size :
           </label>
           <SelectSingle
             options={sizeOptions}
@@ -166,13 +162,13 @@ export default function AircraftTypeModel({
         </div>
 
         {/* أزرار الحفظ والإلغاء */}
-        <div className="flex justify-end gap-x-2 pt-4 border-t border-gray-100">
+        <div className="flex justify-start gap-x-2 pt-4 border-t border-gray-100">
           <button
             type="button"
             onClick={handleClose}
             className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm rounded transition-colors"
           >
-            إلغاء
+            cancile
           </button>
           <button
             type="submit"
@@ -181,11 +177,11 @@ export default function AircraftTypeModel({
           >
             {adding || updating
               ? mode === "add"
-                ? "جاري الإضافة..."
-                : "جاري التعديل..."
+                ? "Loading ..."
+                : "Loading ..."
               : mode === "add"
-                ? "إضافة"
-                : "تعديل"}
+                ? "Add"
+                : "Edit"}
           </button>
         </div>
       </form>

@@ -5,3 +5,8 @@ const api = axios.create({
 });
 
 export default api;
+
+
+export const apiFids = axios.create({
+  baseURL: import.meta.env.VITE_API_Fids_URL, // جاي من .env
+});
