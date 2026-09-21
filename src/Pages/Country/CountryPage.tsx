@@ -1,12 +1,12 @@
 import { useState, useMemo } from 'react';
 import { createColumnHelper } from '@tanstack/react-table';
 
-import { useCountry } from '../Hooks/CountryHook/useCountry';
-import type { ICountry } from '../Interface/ICountry';
-import CrudBtn from '../Components/Buttons/CrudBtn';
-import PageTitle from '../Components/Text/PageTitle';
-import CountryModel from '../Components/Popup/CountryModel';
-import MultiDataTable from '../Components/Tables/MultiDataTable';
+import { useCountry } from '../../Hooks/CountryHook/useCountry';
+import type { ICountry } from '../../Interface/ICountry';
+import CrudBtn from '../../Components/Buttons/CrudBtn';
+import PageTitle from '../../Components/Text/PageTitle';
+import CountryModel from '../../Components/Popup/CountryModel';
+import MultiDataTable from '../../Components/Tables/MultiDataTable';
 
 const columnHelper = createColumnHelper<ICountry>();
 

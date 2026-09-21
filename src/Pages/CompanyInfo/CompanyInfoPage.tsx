@@ -1,10 +1,10 @@
-import { useCompanyInfo } from '../Hooks/CompanyInfoHook/useCompanyInfo';
-import type { ICompanyInfo } from '../Interface/ICompanyInfo';
+import { useCompanyInfo } from '../../Hooks/CompanyInfoHook/useCompanyInfo';
+import type { ICompanyInfo } from '../../Interface/ICompanyInfo';
 import { useState } from 'react';
-import CrudBtn from '../Components/Buttons/CrudBtn';
-import PageTitle from '../Components/Text/PageTitle';
-import MainTable from '../Components/Tables/MainTable';
-import CompanyInfoModel from '../Components/Popup/CompanyInfoModel';
+import CrudBtn from '../../Components/Buttons/CrudBtn';
+import PageTitle from '../../Components/Text/PageTitle';
+import MainTable from '../../Components/Tables/MainTable';
+import CompanyInfoModel from '../../Components/Popup/CompanyInfoModel';
 
 export default function CompanyInfoPage() {
   const headers = [

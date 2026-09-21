@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+// import type { ReactNode } from 'react';
 export interface IAircraftRegistration {
   id: number;
   registration: string;
@@ -11,10 +11,10 @@ export interface IAircraftRegistration {
   };
 }
 
-export interface IAircraftRegistrationshow {
-  id: number;
-  registration: string;
-  maxTakoffWieght: number;
-  aircraftType: string; // نص مباشر وليس كائناً
-  action: ReactNode;
-}
+// export interface IAircraftRegistrationshow {
+//   id: number;
+//   registration: string;
+//   maxTakoffWieght: number;
+//   aircraftType: string; // نص مباشر وليس كائناً
+//   action: ReactNode;
+// }

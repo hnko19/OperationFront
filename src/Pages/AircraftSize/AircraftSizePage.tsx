@@ -1,12 +1,12 @@
 import { useState, useMemo } from 'react';
 import { createColumnHelper } from '@tanstack/react-table';
 
-import { useAircraftSize } from '../Hooks/AircraftSizeHook/useAircraftSize';
-import type { IAircraftSize } from '../Interface/IAircraftSize';
-import CrudBtn from '../Components/Buttons/CrudBtn';
-import AircraftSizeModel from '../Components/Popup/AircraftSizeModel';
-import PageTitle from '../Components/Text/PageTitle';
-import MultiDataTable from '../Components/Tables/MultiDataTable';
+import { useAircraftSize } from '../../Hooks/AircraftSizeHook/useAircraftSize';
+import type { IAircraftSize } from '../../Interface/IAircraftSize';
+import CrudBtn from '../../Components/Buttons/CrudBtn';
+import AircraftSizeModel from '../../Components/Popup/AircraftSizeModel';
+import PageTitle from '../../Components/Text/PageTitle';
+import MultiDataTable from '../../Components/Tables/MultiDataTable';
 const columnHelper = createColumnHelper<IAircraftSize>();
 
 export default function AircraftSizePage() {
