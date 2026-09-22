@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { createColumnHelper } from '@tanstack/react-table';
 
 import { useCountry } from '../../Hooks/CountryHook/useCountry';
@@ -9,6 +9,7 @@ import CountryModel from '../../Components/Popup/CountryModel';
 import MultiDataTable from '../../Components/Tables/MultiDataTable';
 
 import { useDeleteCountry } from '../../Hooks/CountryHook/useDeleteCountry';
+
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 const columnHelper = createColumnHelper<ICountry>();
@@ -27,30 +28,33 @@ export default function CountryPage() {
     setIsModalOpen(true);
   };
 
-  const handleEdit = (country: ICountry) => {
+  const handleEdit = useCallback((country: ICountry) => {
     setSelectedCountry(country);
     setModalMode('edit');
     setIsModalOpen(true);
-  };
+  }, []);
 
-  const handleDelete = (country: ICountry) => {
-    Swal.fire({
-      title: 'تأكيد الحذف',
-      text: `هل تريد حذف "${country.nameAr}"؟`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      confirmButtonText: 'نعم، احذف',
-      cancelButtonText: 'إلغاء',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        deleteCountry(country.id, {
-          onSuccess: () => toast.success('تم الحذف بنجاح'),
-          onError: () => toast.error('حدث خطأ أثناء الحذف'),
-        });
-      }
-    });
-  };
+  const handleDelete = useCallback(
+    (country: ICountry) => {
+      Swal.fire({
+        title: 'تأكيد الحذف',
+        text: `هل تريد حذف "${country.nameAr}"؟`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'نعم، احذف',
+        cancelButtonText: 'إلغاء',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteCountry(country.id, {
+            onSuccess: () => toast.success('تم الحذف بنجاح'),
+            onError: () => toast.error('حدث خطأ أثناء الحذف'),
+          });
+        }
+      });
+    },
+    [deleteCountry],
+  );
   // تعريف الأعمدة فقط
   const columns = useMemo(
     () => [
@@ -104,7 +108,7 @@ export default function CountryPage() {
         enableSorting: false,
       }),
     ],
-    [],
+    [handleEdit, handleDelete],
   );
 
   return (

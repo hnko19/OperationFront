@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react'; //1
+import { useState, useMemo, useCallback } from 'react';
+
 import { createColumnHelper } from '@tanstack/react-table'; //2
 
 import { useAircraftRegistration } from '../../Hooks/AircraftRegistrationHook/useAircraftRegistration';
@@ -31,30 +32,36 @@ export default function AircraftRegistrationPage() {
     setIsModalOpen(true);
   };
 
-  const handleEdit = (aircraftRegistration: IAircraftRegistration) => {
-    setSelectedAircraftRegistration(aircraftRegistration); //5
-    setModalMode('edit');
-    setIsModalOpen(true);
-  };
+  const handleEdit = useCallback(
+    (aircraftRegistration: IAircraftRegistration) => {
+      setSelectedAircraftRegistration(aircraftRegistration); //5
+      setModalMode('edit');
+      setIsModalOpen(true);
+    },
+    [],
+  );
 
-  const handleDelete = (aircraftregistration: IAircraftRegistration) => {
-    Swal.fire({
-      title: 'تأكيد الحذف',
-      text: `هل تريد حذف "${aircraftregistration.registration}"؟`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      confirmButtonText: 'نعم، احذف',
-      cancelButtonText: 'إلغاء',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        deleteAircraftRegistration(aircraftregistration.id, {
-          onSuccess: () => toast.success('تم الحذف بنجاح'),
-          onError: () => toast.error('حدث خطأ أثناء الحذف'),
-        });
-      }
-    });
-  };
+  const handleDelete = useCallback(
+    (aircraftregistration: IAircraftRegistration) => {
+      Swal.fire({
+        title: 'تأكيد الحذف',
+        text: `هل تريد حذف "${aircraftregistration.registration}"؟`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'نعم، احذف',
+        cancelButtonText: 'إلغاء',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteAircraftRegistration(aircraftregistration.id, {
+            onSuccess: () => toast.success('تم الحذف بنجاح'),
+            onError: () => toast.error('حدث خطأ أثناء الحذف'),
+          });
+        }
+      });
+    },
+    [deleteAircraftRegistration],
+  );
 
   // تعريف الأعمدة      6
   const columns = useMemo(
