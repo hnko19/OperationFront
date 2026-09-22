@@ -109,7 +109,7 @@ export default function AircraftRegistrationPage() {
         enableSorting: false,
       }),
     ],
-    [],
+    [handleEdit, handleDelete],
   );
 
   return (
