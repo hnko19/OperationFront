@@ -27,7 +27,7 @@ export const UpdateAircraftRegistration = async (
 export const deleteAircraftRegistration = async (
   Id: number,
 ): Promise<IApiResponse<object>> => {
-  if (!Id) throw new Error('Airport ID is required for delete');
-  const { data } = await api.delete('AircraftType?Id=');
+  if (!Id) throw new Error('AircraftRegistration ID is required for delete');
+  const { data } = await api.delete(`AircraftRegistration/${Id}`);
   return data;
 };

@@ -8,11 +8,17 @@ import PageTitle from '../../Components/Text/PageTitle';
 import AircraftRegistrationModel from '../../Components/Popup/AircraftRegistrationModel';
 import MultiDataTable from '../../Components/Tables/MultiDataTable'; //3
 
+import { useDeleteAircraftRegistration } from '../../Hooks/AircraftRegistrationHook/useDeleteAircraftRegistration';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
+
 const columnHelper = createColumnHelper<IAircraftRegistration>(); //4
 
 export default function AircraftRegistrationPage() {
   const { data: aircraftRegistrations = [], isLoading } =
     useAircraftRegistration();
+  const { mutate: deleteAircraftRegistration /* isPending: isDeleting*/ } =
+    useDeleteAircraftRegistration();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedAircraftRegistration, setSelectedAircraftRegistration] =
@@ -29,6 +35,25 @@ export default function AircraftRegistrationPage() {
     setSelectedAircraftRegistration(aircraftRegistration); //5
     setModalMode('edit');
     setIsModalOpen(true);
+  };
+
+  const handleDelete = (aircraftregistration: IAircraftRegistration) => {
+    Swal.fire({
+      title: 'تأكيد الحذف',
+      text: `هل تريد حذف "${aircraftregistration.registration}"؟`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'نعم، احذف',
+      cancelButtonText: 'إلغاء',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteAircraftRegistration(aircraftregistration.id, {
+          onSuccess: () => toast.success('تم الحذف بنجاح'),
+          onError: () => toast.error('حدث خطأ أثناء الحذف'),
+        });
+      }
+    });
   };
 
   // تعريف الأعمدة      6
@@ -63,6 +88,13 @@ export default function AircraftRegistrationPage() {
                 text="edit"
                 btnType="edit"
                 fun={() => handleEdit(aircraft)}
+              />
+              {/* زر الحذف الجديد */}
+              <CrudBtn
+                text="delete"
+                btnType="delete"
+                fun={() => handleDelete(aircraft)}
+                // disabled={isDeleting}
               />
             </div>
           );

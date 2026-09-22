@@ -21,6 +21,6 @@ export const deleteCountry = async (
   Id: number,
 ): Promise<IApiResponse<object>> => {
   if (!Id) throw new Error('Country ID is required for delete');
-  const { data } = await api.delete('Country?Id=');
+  const { data } = await api.delete(`Country/${Id}`);
   return data;
 };

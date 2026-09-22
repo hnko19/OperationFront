@@ -39,7 +39,7 @@ export default function AircraftRegistrationModel({
       id: initialData?.id ?? 0,
       registration: initialData?.registration ?? '',
       aircraftTypeId: initialData?.aircraftTypeId ?? 0,
-      maxTakoffWieght: initialData?.maxTakoffWieght ?? 0,
+      maxTakoffWieght: initialData?.maxTakoffWieght ?? '',
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
@@ -48,7 +48,10 @@ export default function AircraftRegistrationModel({
       maxTakoffWieght: Yup.string().required('maxTakoffWieght is required'),
     }),
     onSubmit: (values, { resetForm }) => {
-      const payload: IAircraftRegistration = values;
+      const payload: IAircraftRegistration = {
+        ...values,
+        maxTakoffWieght: Number(values.maxTakoffWieght),
+      };
 
       if (mode === 'add') {
         AddAircraftRegistration(payload, {
@@ -80,7 +83,7 @@ export default function AircraftRegistrationModel({
         id: initialData?.id ?? 0,
         registration: initialData?.registration ?? '',
         aircraftTypeId: initialData?.aircraftTypeId ?? 0,
-        maxTakoffWieght: initialData?.maxTakoffWieght ?? 0,
+        maxTakoffWieght: initialData?.maxTakoffWieght ?? '',
       });
     }
     onClose();

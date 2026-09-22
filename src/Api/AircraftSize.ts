@@ -25,7 +25,7 @@ export const UpdateAircraftSize = async (
 export const deleteAircraftSize = async (
   Id: number,
 ): Promise<IApiResponse<object>> => {
-  if (!Id) throw new Error('Airport ID is required for delete');
-  const { data } = await api.delete('aircraftSize?Id=');
+  if (!Id) throw new Error('AircraftSize ID is required for delete');
+  const { data } = await api.delete(`AircraftSize/${Id}`);
   return data;
 };

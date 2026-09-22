@@ -1,5 +1,5 @@
-import { useState, useMemo } from 'react';   //
-import { createColumnHelper } from '@tanstack/react-table';  //2
+import { useState, useMemo } from 'react'; //
+import { createColumnHelper } from '@tanstack/react-table'; //2
 
 import { useAircraftSize } from '../../Hooks/AircraftSizeHook/useAircraftSize';
 import type { IAircraftSize } from '../../Interface/IAircraftSize';
@@ -7,6 +7,10 @@ import CrudBtn from '../../Components/Buttons/CrudBtn';
 import AircraftSizeModel from '../../Components/Popup/AircraftSizeModel';
 import PageTitle from '../../Components/Text/PageTitle';
 import MultiDataTable from '../../Components/Tables/MultiDataTable';
+import { useDeleteAircraftSize } from '../../Hooks/AircraftSizeHook/useDeleteAircraftSize';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
+
 const columnHelper = createColumnHelper<IAircraftSize>();
 
 export default function AircraftSizePage() {
@@ -14,6 +18,9 @@ export default function AircraftSizePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedAircraftSize, setSelectedAircraftSize] =
     useState<IAircraftSize | null>(null);
+
+  const { mutate: deleteAircraftSize /* isPending: isDeleting*/ } =
+    useDeleteAircraftSize();
 
   const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
 
@@ -27,6 +34,25 @@ export default function AircraftSizePage() {
     setSelectedAircraftSize(aircraftsize);
     setModalMode('edit');
     setIsModalOpen(true);
+  };
+
+  const handleDelete = (aircraftsize: IAircraftSize) => {
+    Swal.fire({
+      title: 'تأكيد الحذف',
+      text: `هل تريد حذف "${aircraftsize.size}"؟`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'نعم، احذف',
+      cancelButtonText: 'إلغاء',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteAircraftSize(aircraftsize.id, {
+          onSuccess: () => toast.success('تم الحذف بنجاح'),
+          onError: () => toast.error('حدث خطأ أثناء الحذف'),
+        });
+      }
+    });
   };
 
   // تعريف الأعمدة فقط
@@ -60,6 +86,14 @@ export default function AircraftSizePage() {
                 btnType="edit"
                 fun={() => handleEdit(aircraftSize)}
               />
+
+              {/* زر الحذف الجديد */}
+              <CrudBtn
+                text="delete"
+                btnType="delete"
+                fun={() => handleDelete(aircraftSize)}
+                // disabled={isDeleting}
+              />
             </div>
           );
         },
@@ -87,6 +121,7 @@ export default function AircraftSizePage() {
           btnType="create"
           fun={() => openAddModal()}
         />
+
         <PageTitle text="Aircraft sizes" />
       </div>
       {/* هنا يتم استخدام المتغير لحل خطأ ESLint وتشغيل التحميل */}
