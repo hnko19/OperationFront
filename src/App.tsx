@@ -1,28 +1,32 @@
-import './App.css';
+import "./App.css";
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ToastContainer } from 'react-toastify';
-import ProtuctedRoute from './Components/ProtuctedRoute/ProtuctedRoute';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Layout from './Components/Layout/Layout';
-import NotFoundPage from './Pages/NotFoundPage/NotFoundPage';
-import CountryPage from './Pages/Country/CountryPage';
-import HandlingAgentsCompanyPage from './Pages/HandlingAgentsCompany/HandlingAgentsCompanyPage';
-import AircraftType from './Pages/AircraftType/AircraftType';
-import AircraftRegistrationPage from './Pages/AircraftRegistration/AircraftRegistrationPage';
-import CompanyInfoPage from './Pages/CompanyInfo/CompanyInfoPage';
-import AircraftSizePage from './Pages/AircraftSize/AircraftSizePage';
-import AirlineAgentPage from './Pages/AirlineAgent/AirlineAgent';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ToastContainer } from "react-toastify";
+import ProtuctedRoute from "./Components/ProtuctedRoute/ProtuctedRoute";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Layout from "./Components/Layout/Layout";
+import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
+import CountryPage from "./Pages/Country/CountryPage";
+import HandlingAgentsCompanyPage from "./Pages/HandlingAgentsCompany/HandlingAgentsCompanyPage";
+import AircraftType from "./Pages/AircraftType/AircraftType";
+import AircraftRegistrationPage from "./Pages/AircraftRegistration/AircraftRegistrationPage";
+import CompanyInfoPage from "./Pages/CompanyInfo/CompanyInfoPage";
+import AircraftSizePage from "./Pages/AircraftSize/AircraftSizePage";
+import AirlineAgentPage from "./Pages/AirlineAgent/AirlineAgent";
+import OrgChartApp from "./Pages/test";
+import UserPage from "./Pages/Users/Users";
+import ProfilePage from "./Pages/Users/Profile";
+import UserContextProvider from "./Context/UserContextProvider";
 
 const queryClient = new QueryClient();
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: '',
+      path: "",
       element: <Layout />,
       children: [
-        { path: '*', element: <NotFoundPage /> },
+        { path: "*", element: <NotFoundPage /> },
 
         {
           index: true,
@@ -34,7 +38,7 @@ function App() {
         },
 
         {
-          path: 'handlingAgentsCompany',
+          path: "handlingAgentsCompany",
           element: (
             <ProtuctedRoute>
               <HandlingAgentsCompanyPage />
@@ -43,7 +47,7 @@ function App() {
         },
 
         {
-          path: 'AircraftType',
+          path: "AircraftType",
           element: (
             <ProtuctedRoute>
               <AircraftType />
@@ -52,7 +56,7 @@ function App() {
         },
 
         {
-          path: 'aircraftRegistration',
+          path: "aircraftRegistration",
           element: (
             <ProtuctedRoute>
               <AircraftRegistrationPage />
@@ -61,7 +65,7 @@ function App() {
         },
 
         {
-          path: 'companyInfo',
+          path: "companyInfo",
           element: (
             <ProtuctedRoute>
               <CompanyInfoPage />
@@ -70,7 +74,7 @@ function App() {
         },
 
         {
-          path: 'aircraftSize',
+          path: "aircraftSize",
           element: (
             <ProtuctedRoute>
               <AircraftSizePage />
@@ -78,10 +82,34 @@ function App() {
           ),
         },
         {
-          path: 'airlineAgent',
+          path: "airlineAgent",
           element: (
             <ProtuctedRoute>
               <AirlineAgentPage />
+            </ProtuctedRoute>
+          ),
+        },
+        {
+          path: "test",
+          element: (
+            <ProtuctedRoute>
+              <OrgChartApp />
+            </ProtuctedRoute>
+          ),
+        },
+        {
+          path: "users",
+          element: (
+            <ProtuctedRoute>
+              <UserPage />
+            </ProtuctedRoute>
+          ),
+        },
+        {
+          path: "users/profile",
+          element: (
+            <ProtuctedRoute>
+              <ProfilePage />
             </ProtuctedRoute>
           ),
         },
@@ -90,10 +118,12 @@ function App() {
   ]);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ToastContainer />
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <UserContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <ToastContainer />
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </UserContextProvider>
   );
 }
 

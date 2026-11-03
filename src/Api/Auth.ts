@@ -1,4 +1,5 @@
 
+import type { IApiResponse } from "../Interface/IApiResponse";
 import type { ILogin, ILoginResponse } from "../Interface/ILogin";
 import api from "./Axios";
 
@@ -11,5 +12,7 @@ export const login = async (value: ILogin): Promise<ILoginResponse> => {
 };
 
 
-
-
+export default async function getRoles(): Promise<string[]> {
+  const { data }: { data: IApiResponse<string[]> } = await api.get('Auth/GetRoles');
+  return data.data;
+}
