@@ -1,23 +1,19 @@
 import "./App.css";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ToastContainer } from "react-toastify";
-import ProtuctedRoute from "./Components/ProtuctedRoute/ProtuctedRoute";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Layout from "./Components/Layout/Layout";
-import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
-import CountryPage from "./Pages/Country/CountryPage";
-import HandlingAgentsCompanyPage from "./Pages/HandlingAgentsCompany/HandlingAgentsCompanyPage";
-import AircraftType from "./Pages/AircraftType/AircraftType";
-import AircraftRegistrationPage from "./Pages/AircraftRegistration/AircraftRegistrationPage";
-import CompanyInfoPage from "./Pages/CompanyInfo/CompanyInfoPage";
-import AircraftSizePage from "./Pages/AircraftSize/AircraftSizePage";
-import AirlineAgentPage from "./Pages/AirlineAgent/AirlineAgent";
-import OrgChartApp from "./Pages/test";
-import UserPage from "./Pages/Users/Users";
-import ProfilePage from "./Pages/Users/Profile";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ToastContainer } from 'react-toastify';
+import ProtuctedRoute from './Components/ProtuctedRoute/ProtuctedRoute';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Layout from './Components/Layout/Layout';
+import NotFoundPage from './Pages/NotFoundPage/NotFoundPage';
+import CountryPage from './Pages/Country/CountryPage';
+import HandlingAgentsCompanyPage from './Pages/HandlingAgentsCompany/HandlingAgentsCompanyPage';
+import AircraftType from './Pages/AircraftType/AircraftType';
+import AircraftRegistrationPage from './Pages/AircraftRegistration/AircraftRegistrationPage';
+import CompanyInfoPage from './Pages/CompanyInfo/CompanyInfoPage';
+import AircraftSizePage from './Pages/AircraftSize/AircraftSizePage';
+import AirlineAgentPage from './Pages/AirlineAgent/AirlineAgent';
 import UserContextProvider from "./Context/UserContextProvider";
-
 const queryClient = new QueryClient();
 
 function App() {
@@ -86,30 +82,6 @@ function App() {
           element: (
             <ProtuctedRoute>
               <AirlineAgentPage />
-            </ProtuctedRoute>
-          ),
-        },
-        {
-          path: "test",
-          element: (
-            <ProtuctedRoute>
-              <OrgChartApp />
-            </ProtuctedRoute>
-          ),
-        },
-        {
-          path: "users",
-          element: (
-            <ProtuctedRoute>
-              <UserPage />
-            </ProtuctedRoute>
-          ),
-        },
-        {
-          path: "users/profile",
-          element: (
-            <ProtuctedRoute>
-              <ProfilePage />
             </ProtuctedRoute>
           ),
         },
