@@ -32,9 +32,11 @@ export default function ServiceRequestModal({
   // 1. API Hooks
   // ============================================
 
-  // جلب الخدمات المسجلة سابقاً للرحلة
+  // تعديل 1: جلب الخدمات المسجلة سابقاً فقط في حالة التعديل وعندما يكون المودال مفتوحاً
   const { data: existingServices, isLoading: isLoadingExisting } =
-    useGetServiceDetailByTowerDataId(towerId);
+    useGetServiceDetailByTowerDataId(
+      mode === 'edit' && isOpen ? towerId : null,
+    );
 
   // جلب أنواع الخدمات
   const { data: serviceTypes = [], isLoading: isLoadingTypes } = useQuery({
@@ -66,17 +68,31 @@ export default function ServiceRequestModal({
   // 3. حفظ بيانات الخدمات الحالية مع ID
   // ============================================
 
+  // تعديل 2: حماية الدالة باستخدام Array.isArray وتجاهلها في وضع الإضافة
   const existingServicesMap = useMemo(() => {
     const map = new Map<number, IServiceRequestModel>();
 
-    (existingServices ?? []).forEach((item) => {
-      if (item.serviceTypeId != null) {
+    if (mode === 'add') return map;
+
+    const servicesArray: IServiceRequestModel[] = Array.isArray(
+      existingServices,
+    )
+      ? existingServices
+      : Array.isArray(
+            (existingServices as unknown as { data?: IServiceRequestModel[] })
+              ?.data,
+          )
+        ? (existingServices as unknown as { data: IServiceRequestModel[] }).data
+        : [];
+
+    servicesArray.forEach((item) => {
+      if (item?.serviceTypeId != null) {
         map.set(item.serviceTypeId, item);
       }
     });
 
     return map;
-  }, [existingServices]);
+  }, [existingServices, mode]);
 
   // ============================================
   // 4. تحديد الخدمات الافتراضية
@@ -276,7 +292,7 @@ export default function ServiceRequestModal({
 
         {/* Body */}
         <div className="p-6 max-h-[65vh] overflow-y-auto">
-          {isLoadingTypes || isLoadingExisting ? (
+          {isLoadingTypes || (mode === 'edit' && isLoadingExisting) ? (
             <div className="flex flex-col items-center justify-center py-12 text-gray-500 gap-3">
               <i className="fa-solid fa-circle-notch fa-spin text-3xl text-[#31213F]"></i>
 

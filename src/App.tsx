@@ -18,6 +18,7 @@ import FilghtNotComplate from './Pages/OfficerData/FilghtNotComplate';
 import OfficerDataPage from './Pages/OfficerData/OfficerDataPage';
 import OfficerFlightSearch from './Pages/OfficerData/OfficerFlightSearch';
 import FlightAgentPage from './Pages/OfficerData/FlightAgentPage';
+import OfficerDataDetailsPage from './Pages/OfficerData/OfficerDataDetailsPage';
 const queryClient = new QueryClient();
 
 function App() {
@@ -120,6 +121,14 @@ function App() {
           element: (
             <ProtuctedRoute>
               <OfficerFlightSearch />
+            </ProtuctedRoute>
+          ),
+        },
+        {
+          path: 'officer-details/:id',
+          element: (
+            <ProtuctedRoute>
+              <OfficerDataDetailsPage />
             </ProtuctedRoute>
           ),
         },
