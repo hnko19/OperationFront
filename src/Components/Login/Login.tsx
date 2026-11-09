@@ -52,7 +52,7 @@ export function Login() {
           setSuccessMsg("تم تسجيل الدخول بنجاح");
 
           setUserToken(data.Token);
-          localStorage.setItem("fidsToken", data.Token);
+          localStorage.setItem("operationToken", data.Token);
 
           if (location.pathname == "/login") {
             navigate("/");

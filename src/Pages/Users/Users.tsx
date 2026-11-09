@@ -29,6 +29,9 @@ export default function UsersPage() {
     setIsModalOpen(true);
   };
 
+  const handleReset = (user: IUser) => {
+    console.log(user.id);
+  };
   const columns = useMemo(
     () => [
       columnHelper.accessor("id", {
@@ -64,9 +67,18 @@ export default function UsersPage() {
           return (
             <div className="flex justify-center gap-x-2">
               <CrudBtn
-                text="edit"
+                title="edit user info"
+                text=""
                 btnType="edit"
                 fun={() => handleEdit(user)}
+              />
+              <CrudBtn
+                title="reset user password"
+                text=""
+                btnType="reset"
+                fun={() => {
+                  handleReset(user);
+                }}
               />
             </div>
           );

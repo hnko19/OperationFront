@@ -11,7 +11,7 @@ export const useLogout = () => {
 
   const logout = () => {
     setUserToken("");
-    localStorage.removeItem("fidsToken");
+    localStorage.removeItem("operationToken");
     navigate("/login"); // إعادة التوجيه لصفحة تسجيل الدخول
   };
 
