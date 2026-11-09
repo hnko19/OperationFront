@@ -29,3 +29,16 @@ export async function GetUserDetails(
 
   return data.data;
 }
+
+
+export async function ResetUserPassword(
+  userId: string,
+  password: string,
+): Promise<IUser> {
+  const { data }: { data: IApiResponse<IUser> } =
+    await api.get('/Auth/GetUserDetails', {
+      params: { userId },
+    });
+
+  return data.data;
+}

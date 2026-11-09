@@ -2,6 +2,7 @@ import { useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 // import logo from "../../assets/sacLogo.png";
 import short_logo from "../../../public/airport-logo-short.png";
+import { useLogout } from "../../Hooks/AuthHooks/useLogout";
 
 type MenuItem =
   | {
@@ -21,11 +22,12 @@ export default function SideMenu({ children }: { children: ReactNode }) {
   //   const logout = useLogout()
   const [sidenav, setSidenav] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
-
+  const logout = useLogout();
   const toggleSubmenu = (title: string) => {
     setOpenSubmenu(openSubmenu === title ? null : title);
   };
 
+ 
   const menuItems: MenuItem[] = [
     {
       type: "link",
@@ -225,7 +227,7 @@ export default function SideMenu({ children }: { children: ReactNode }) {
                 {/* زر تسجيل الخروج */}
                 <div className="mt-4">
                   <button
-                    //   onClick={logout}
+                    onClick={logout}
                     className="flex items-center w-full text-sm font-medium text-white py-2 px-3 hover:bg-red-600 rounded-md transition"
                   >
                     <svg className="w-5 h-5 fill-current" viewBox="0 0 20 20">
