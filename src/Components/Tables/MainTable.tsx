@@ -17,7 +17,7 @@ export default function MainTable<T extends object>({
             {tblHeader.map((header, index) => (
               <th
                 key={index}
-                className="px-6 py-3 bg-[#31213F]  leading-4 font-medium text-xl text-white uppercase tracking-wider"
+                className="px-6 py-3 bg-[#2050a3]  leading-4 font-medium text-xl text-white uppercase tracking-wider"
               >
                 {header}
               </th>

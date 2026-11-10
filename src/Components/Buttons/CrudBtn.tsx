@@ -22,7 +22,7 @@ export default function CrudBtn({ text, btnType, title, fun }: CrudBtnProps) {
   let icon: React.ReactNode | null = null;
 
   if (btnType === "create") {
-    bgColor = "bg-[#31213F]";
+    bgColor = "bg-[#2050a3]";
     icon = <i className="fa-solid fa-plus"></i>;
   } else if (btnType === "cancel") {
     bgColor = "bg-orange-600";

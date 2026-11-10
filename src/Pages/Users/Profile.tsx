@@ -321,7 +321,7 @@ export default function ProfilePage() {
                 className="space-y-4"
               >
                 {/* Current Password */}
-                <div className="flex flex-col hidden">
+                <div className=" flex-col hidden">
                   <label
                     htmlFor="currentPassword"
                     className="text-sm font-medium text-gray-700"

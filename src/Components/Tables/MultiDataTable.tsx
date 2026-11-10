@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   flexRender,
   useReactTable,
@@ -8,7 +8,7 @@ import {
   getFilteredRowModel,
   type ColumnDef,
   type SortingState,
-} from '@tanstack/react-table';
+} from "@tanstack/react-table";
 
 type MultiDataTableProps<TData> = {
   data: TData[];
@@ -23,7 +23,7 @@ export default function MultiDataTable<TData>({
   isLoading = false,
 }: MultiDataTableProps<TData>) {
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [globalFilter, setGlobalFilter] = useState('');
+  const [globalFilter, setGlobalFilter] = useState("");
 
   // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
@@ -52,11 +52,11 @@ export default function MultiDataTable<TData>({
       <div className="w-full flex" dir="rtl">
         <input
           type="text"
-          value={globalFilter ?? ''}
+          value={globalFilter ?? ""}
           onChange={(e) => setGlobalFilter(e.target.value)}
           placeholder="بحث سريع..."
           disabled={isLoading}
-          className="px-3 py-2 border border-gray-300 rounded-md text-sm outline-none focus:border-[#31213F] focus:ring-1 focus:ring-[#31213F] w-full sm:w-64 text-right disabled:bg-gray-100 disabled:cursor-not-allowed bg-white shadow-xs"
+          className="px-3 py-2 border border-gray-300 rounded-md text-sm outline-none focus:border-[#2050a3] focus:ring-1 focus:ring-[#31213F] w-full sm:w-64 text-right disabled:bg-gray-100 disabled:cursor-not-allowed bg-white shadow-xs"
         />
       </div>
 
@@ -70,21 +70,21 @@ export default function MultiDataTable<TData>({
                 {headerGroup.headers.map((header) => {
                   const canSort = header.column.getCanSort();
                   const isSorted = header.column.getIsSorted();
-                  const isActions = header.column.id === 'actions';
+                  const isActions = header.column.id === "actions";
 
                   return (
                     <th
                       key={header.id}
                       onClick={header.column.getToggleSortingHandler()}
-                      className={`px-2.5 py-1.5 sm:px-4 sm:py-2 bg-[#31213F] leading-4 font-medium text-xs sm:text-sm text-white uppercase tracking-wider whitespace-nowrap select-none ${
+                      className={`px-2.5 py-1.5 sm:px-4 sm:py-2 bg-[#2050a3] leading-4 font-medium text-xs sm:text-sm text-white uppercase tracking-wider whitespace-nowrap select-none ${
                         canSort
-                          ? 'cursor-pointer hover:bg-[#432d56] transition'
-                          : ''
+                          ? "cursor-pointer hover:bg-[#432d56] transition"
+                          : ""
                       }`}
                     >
                       <div
                         className={`flex items-center gap-1.5 ${
-                          isActions ? 'justify-end' : 'justify-center'
+                          isActions ? "justify-end" : "justify-center"
                         }`}
                       >
                         {header.isPlaceholder
@@ -93,10 +93,10 @@ export default function MultiDataTable<TData>({
                               header.column.columnDef.header,
                               header.getContext(),
                             )}
-                        {isSorted === 'asc' && (
+                        {isSorted === "asc" && (
                           <span className="text-[10px]">▲</span>
                         )}
-                        {isSorted === 'desc' && (
+                        {isSorted === "desc" && (
                           <span className="text-[10px]">▼</span>
                         )}
                       </div>
@@ -118,9 +118,7 @@ export default function MultiDataTable<TData>({
                 >
                   <div className="flex flex-col items-center justify-center gap-3">
                     <div className="w-8 h-8 border-4 border-gray-200 border-t-[#31213F] rounded-full animate-spin"></div>
-                    <span className="text-sm font-medium">
-                      جاري تحميل البيانات...
-                    </span>
+                    <span className="text-sm font-medium">Loading ...</span>
                   </div>
                 </td>
               </tr>
@@ -131,7 +129,7 @@ export default function MultiDataTable<TData>({
                   colSpan={columns.length}
                   className="block md:table-cell px-4 py-6 sm:px-6 sm:py-8 text-center text-gray-500 text-sm border md:border-0 md:border-b border-gray-300 md:border-gray-500 rounded-lg md:rounded-none"
                 >
-                  لا توجد بيانات متاحة
+                  No records found.
                 </td>
               </tr>
             ) : (
@@ -139,30 +137,30 @@ export default function MultiDataTable<TData>({
               table.getRowModel().rows.map((row) => (
                 <tr
                   key={row.id}
-                  className="block md:table-row bg-white rounded-lg md:rounded-none border border-gray-300 md:border-0 shadow-xs md:shadow-none overflow-hidden hover:bg-[#FFF8CC] hover:text-[#5A4A00] text-blue-900 transition"
+                  className="block md:table-row bg-white rounded-lg md:rounded-none border border-gray-300 md:border-0 shadow-xs md:shadow-none overflow-hidden hover:bg-[#c9c9c9] hover:text-black text-[#100f0fc7] transition"
                 >
                   {row.getVisibleCells().map((cell) => {
                     const headerDef = cell.column.columnDef.header;
-                    const isActions = cell.column.id === 'actions';
+                    const isActions = cell.column.id === "actions";
 
                     return (
                       <td
                         key={cell.id}
                         className={`flex md:table-cell items-center justify-between gap-4 px-4 py-2 md:px-4 md:py-1.5 border-b border-gray-100 last:border-b-0 md:border-b md:border-gray-500 text-xs sm:text-sm leading-5 text-right md: whitespace-nowrap ${
-                          isActions ? 'md:text-right md:w-1' : 'md:text-center'
+                          isActions ? "md:text-right md:w-1" : "md:text-center"
                         }`}
                       >
                         {/* اسم العمود في الموبايل */}
                         <span className="md:hidden font-bold text-[#31213F] shrink-0">
-                          {typeof headerDef === 'string' ? headerDef : ''}
+                          {typeof headerDef === "string" ? headerDef : ""}
                         </span>
 
                         {/* قيمة الخلية (تمت محاذاة عمود actions لأقصى اليمين تلقائياً) */}
                         <div
                           className={`md:block font-medium break-words w-full ${
                             isActions
-                              ? 'text-right [&>div]:justify-end'
-                              : 'text-left md:text-center'
+                              ? "text-right [&>div]:justify-end"
+                              : "text-left md:text-center"
                           }`}
                         >
                           {flexRender(
@@ -201,9 +199,9 @@ export default function MultiDataTable<TData>({
 
         <div className="flex items-center justify-between w-full sm:w-auto gap-2 pt-2 sm:pt-0 border-t sm:border-t-0 border-gray-200">
           <span>
-            الصفحة{' '}
+            الصفحة{" "}
             <strong>
-              {table.getState().pagination.pageIndex + 1} من{' '}
+              {table.getState().pagination.pageIndex + 1} من{" "}
               {table.getPageCount() || 1}
             </strong>
           </span>
