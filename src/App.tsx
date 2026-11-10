@@ -17,6 +17,7 @@ import OrgChartApp from "./Pages/test";
 import UserPage from "./Pages/Users/Users";
 import ProfilePage from "./Pages/Users/Profile";
 import UserContextProvider from "./Context/UserContextProvider";
+import Login from "./Pages/Login/Login";
 
 const queryClient = new QueryClient();
 
@@ -94,6 +95,14 @@ function App() {
           element: (
             <ProtuctedRoute>
               <OrgChartApp />
+            </ProtuctedRoute>
+          ),
+        },
+        {
+          path: "login",
+          element: (
+            <ProtuctedRoute>
+              <Login />
             </ProtuctedRoute>
           ),
         },

@@ -1,15 +1,16 @@
 
 export interface ILogin {
     Email: string,
-    Password: string
+    Password: string,
+    UserName: string
 }
 
 export interface ILoginResponse {
  data : {
-    UserId: string;
-    Id: number;
-    UserName: string;
-    Email: string;
-    Token: string;
+    userId: string;
+    id: number;
+    userName: string;
+    email: string;
+    token: string;
  }
 }

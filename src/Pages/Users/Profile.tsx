@@ -53,6 +53,7 @@ export default function ProfilePage() {
       phoneNumber: Yup.string().nullable(),
     }),
     onSubmit: (values) => {
+      console.log(values);
       const payload: IUser = {
         ...values,
         phoneNumber: values.phoneNumber || null,
@@ -72,7 +73,7 @@ export default function ProfilePage() {
   // Formik 2: تغيير كلمة المرور
   const passwordFormik = useFormik({
     initialValues: {
-      currentPassword: "",
+      currentPassword: "78945612",
       newPassword: "",
       confirmPassword: "",
     },
@@ -320,7 +321,7 @@ export default function ProfilePage() {
                 className="space-y-4"
               >
                 {/* Current Password */}
-                <div className="flex flex-col">
+                <div className="flex flex-col hidden">
                   <label
                     htmlFor="currentPassword"
                     className="text-sm font-medium text-gray-700"

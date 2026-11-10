@@ -16,3 +16,23 @@ export default async function getRoles(): Promise<string[]> {
   const { data }: { data: IApiResponse<string[]> } = await api.get('Auth/GetRoles');
   return data.data;
 }
+
+
+export async function resetUserPassword(
+  userId: string,
+  password: string,
+): Promise<boolean> {
+  const { data } = await api.post<boolean>(
+    "/Auth/ResetPasswordForAdmin",
+    null,
+    {
+      params: {
+        userId,
+        password,
+      },
+    }
+  );
+  console.log(data);
+
+  return data;
+}
