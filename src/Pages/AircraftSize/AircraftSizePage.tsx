@@ -1,5 +1,5 @@
-import { useState, useMemo } from 'react'; //
-import { createColumnHelper } from '@tanstack/react-table'; //2
+import { useState, useMemo, useCallback } from 'react'; // 1. أضفنا useCallback هنا
+import { createColumnHelper } from '@tanstack/react-table';
 
 import { useAircraftSize } from '../../Hooks/AircraftSizeHook/useAircraftSize';
 import type { IAircraftSize } from '../../Interface/IAircraftSize';
@@ -25,45 +25,44 @@ export default function AircraftSizePage() {
   const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
 
   const openAddModal = () => {
-    setSelectedAircraftSize(null); // خزن البيانات
+    setSelectedAircraftSize(null);
     setModalMode('add');
     setIsModalOpen(true);
   };
 
-  const handleEdit = (aircraftsize: IAircraftSize) => {
+  // 2. تغليف handleEdit بـ useCallback
+  const handleEdit = useCallback((aircraftsize: IAircraftSize) => {
     setSelectedAircraftSize(aircraftsize);
     setModalMode('edit');
     setIsModalOpen(true);
-  };
+  }, []);
 
-  const handleDelete = (aircraftsize: IAircraftSize) => {
-    Swal.fire({
-      title: 'تأكيد الحذف',
-      text: `هل تريد حذف "${aircraftsize.size}"؟`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      confirmButtonText: 'نعم، احذف',
-      cancelButtonText: 'إلغاء',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        deleteAircraftSize(aircraftsize.id, {
-          onSuccess: () => toast.success('تم الحذف بنجاح'),
-          onError: () => toast.error('حدث خطأ أثناء الحذف'),
-        });
-      }
-    });
-  };
+  // 3. تغليف handleDelete بـ useCallback مع تمرير deleteAircraftSize كاعتمادية
+  const handleDelete = useCallback(
+    (aircraftsize: IAircraftSize) => {
+      Swal.fire({
+        title: 'تأكيد الحذف',
+        text: `هل تريد حذف "${aircraftsize.size}"؟`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'نعم، احذف',
+        cancelButtonText: 'إلغاء',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteAircraftSize(aircraftsize.id, {
+            onSuccess: () => toast.success('تم الحذف بنجاح'),
+            onError: () => toast.error('حدث خطأ أثناء الحذف'),
+          });
+        }
+      });
+    },
+    [deleteAircraftSize],
+  );
 
-  // تعريف الأعمدة فقط
+  // 4. إضافة handleEdit و handleDelete في مصفوفة الاعتماديات الخاصة بـ useMemo
   const columns = useMemo(
     () => [
-      // columnHelper.display({
-      //   id: 'index',
-      //   header: '#',
-      //   cell: (info) => info.row.index + 1,
-      //   enableSorting: false,
-      // }),
       columnHelper.accessor('id', {
         header: '#',
         cell: (info) => info.getValue(),
@@ -87,12 +86,10 @@ export default function AircraftSizePage() {
                 fun={() => handleEdit(aircraftSize)}
               />
 
-              {/* زر الحذف الجديد */}
               <CrudBtn
                 text="delete"
                 btnType="delete"
                 fun={() => handleDelete(aircraftSize)}
-                // disabled={isDeleting}
               />
             </div>
           );
@@ -100,7 +97,7 @@ export default function AircraftSizePage() {
         enableSorting: false,
       }),
     ],
-    [],
+    [handleEdit, handleDelete], // <-- هنا تم حل تحذير ESLint
   );
 
   return (
@@ -124,7 +121,7 @@ export default function AircraftSizePage() {
 
         <PageTitle text="Aircraft sizes" />
       </div>
-      {/* هنا يتم استخدام المتغير لحل خطأ ESLint وتشغيل التحميل */}
+
       <MultiDataTable
         data={aircraftsizes}
         columns={columns}

@@ -96,13 +96,13 @@ export default function AirlineAgentPage() {
       }),
 
       columnHelper.accessor('nameAr', {
-        header: 'الاسم بالعربي',
+        header: 'Arabic Name',
         cell: (info) => info.getValue() || '-',
       }),
 
       // لاحظ كتابة nameAn كما وردت لديك في الكود المرجعي
       columnHelper.accessor('nameAn', {
-        header: 'الاسم بالإنجليزي',
+        header: 'English Name',
         cell: (info) => info.getValue() || '-',
       }),
 

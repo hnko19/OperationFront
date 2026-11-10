@@ -1,4 +1,4 @@
-import "./App.css";
+import './App.css';
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
@@ -17,17 +17,16 @@ import OrgChartApp from "./Pages/test";
 import UserPage from "./Pages/Users/Users";
 import ProfilePage from "./Pages/Users/Profile";
 import UserContextProvider from "./Context/UserContextProvider";
-import Login from "./Pages/Login/Login";
 
 const queryClient = new QueryClient();
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: "",
+      path: '',
       element: <Layout />,
       children: [
-        { path: "*", element: <NotFoundPage /> },
+        { path: '*', element: <NotFoundPage /> },
 
         {
           index: true,
@@ -39,7 +38,7 @@ function App() {
         },
 
         {
-          path: "handlingAgentsCompany",
+          path: 'handlingAgentsCompany',
           element: (
             <ProtuctedRoute>
               <HandlingAgentsCompanyPage />
@@ -48,7 +47,7 @@ function App() {
         },
 
         {
-          path: "AircraftType",
+          path: 'AircraftType',
           element: (
             <ProtuctedRoute>
               <AircraftType />
@@ -57,7 +56,7 @@ function App() {
         },
 
         {
-          path: "aircraftRegistration",
+          path: 'aircraftRegistration',
           element: (
             <ProtuctedRoute>
               <AircraftRegistrationPage />
@@ -66,7 +65,7 @@ function App() {
         },
 
         {
-          path: "companyInfo",
+          path: 'companyInfo',
           element: (
             <ProtuctedRoute>
               <CompanyInfoPage />
@@ -75,7 +74,7 @@ function App() {
         },
 
         {
-          path: "aircraftSize",
+          path: 'aircraftSize',
           element: (
             <ProtuctedRoute>
               <AircraftSizePage />
@@ -83,18 +82,36 @@ function App() {
           ),
         },
         {
-          path: "airlineAgent",
+          path: 'airlineAgent',
           element: (
             <ProtuctedRoute>
               <AirlineAgentPage />
             </ProtuctedRoute>
           ),
         },
+
         {
-          path: "test",
+          path: 'officerData',
           element: (
             <ProtuctedRoute>
-              <OrgChartApp />
+              <OfficerDataPage />
+            </ProtuctedRoute>
+          ),
+        },
+        {
+          path: 'filghtNotComplate',
+          element: (
+            <ProtuctedRoute>
+              <FilghtNotComplate />
+            </ProtuctedRoute>
+          ),
+        },
+
+        {
+          path: 'flightagentPage',
+          element: (
+            <ProtuctedRoute>
+              <FlightAgentPage />
             </ProtuctedRoute>
           ),
         },
@@ -107,18 +124,18 @@ function App() {
           ),
         },
         {
-          path: "users",
+          path: 'officerFlightSearch',
           element: (
             <ProtuctedRoute>
-              <UserPage />
+              <OfficerFlightSearch />
             </ProtuctedRoute>
           ),
         },
         {
-          path: "users/profile",
+          path: 'officer-details/:id',
           element: (
             <ProtuctedRoute>
-              <ProfilePage />
+              <OfficerDataDetailsPage />
             </ProtuctedRoute>
           ),
         },
