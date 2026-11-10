@@ -62,7 +62,7 @@ export default function MultiDataTable<TData>({
 
       {/* الجدول الرئيسي المتجاوب */}
       <div className="w-full overflow-x-auto">
-        <table className="min-w-full block md:table md:divide-y md:divide-gray-500">
+        <table className="min-w-full block md:table md:divide-y md:divide-gray-500 overflow-hidden rounded-md">
           {/* ترويسة الجدول (تم تصغير الحجم والـ Padding هنا) */}
           <thead className="hidden md:table-header-group">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -76,10 +76,8 @@ export default function MultiDataTable<TData>({
                     <th
                       key={header.id}
                       onClick={header.column.getToggleSortingHandler()}
-                      className={`px-2.5 py-1.5 sm:px-4 sm:py-2 bg-[#2050a3] leading-4 font-medium text-xs sm:text-sm text-white uppercase tracking-wider whitespace-nowrap select-none ${
-                        canSort
-                          ? "cursor-pointer transition"
-                          : ""
+                      className={`px-2.5 py-1.5 sm:px-4 sm:py-2 bg-[#2050a3] leading-4 font-bold text-4xl sm:text-sm text-white uppercase tracking-wider whitespace-nowrap select-none ${
+                        canSort ? "cursor-pointer transition" : ""
                       }`}
                     >
                       <div
@@ -137,7 +135,7 @@ export default function MultiDataTable<TData>({
               table.getRowModel().rows.map((row) => (
                 <tr
                   key={row.id}
-                  className="block md:table-row bg-white rounded-lg md:rounded-none border border-gray-300 md:border-0 shadow-xs md:shadow-none overflow-hidden hover:bg-[#c9c9c9] hover:text-black text-[#100f0fc7] transition"
+                  className="block md:table-row bg-white rounded-lg md:rounded-none border border-gray-300 md:border-0 shadow-xs md:shadow-none overflow-hidden hover:bg-[#2050a326] hover:text-[#2050a3] text-[#100f0fc7] transition"
                 >
                   {row.getVisibleCells().map((cell) => {
                     const headerDef = cell.column.columnDef.header;

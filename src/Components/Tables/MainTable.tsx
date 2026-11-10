@@ -11,7 +11,7 @@ export default function MainTable<T extends object>({
 }: MainTableProps<T>) {
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-500">
+      <table className="min-w-full divide-y divide-gray-500 ">
         <thead>
           <tr className="text-center">
             {tblHeader.map((header, index) => (
