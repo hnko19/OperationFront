@@ -78,7 +78,7 @@ export default function MultiDataTable<TData>({
                       onClick={header.column.getToggleSortingHandler()}
                       className={`px-2.5 py-1.5 sm:px-4 sm:py-2 bg-[#2050a3] leading-4 font-medium text-xs sm:text-sm text-white uppercase tracking-wider whitespace-nowrap select-none ${
                         canSort
-                          ? "cursor-pointer hover:bg-[#432d56] transition"
+                          ? "cursor-pointer transition"
                           : ""
                       }`}
                     >
